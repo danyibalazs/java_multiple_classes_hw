@@ -13,7 +13,7 @@ public class LibraryTest {
     private Book book2;
     private Book book3;
 
-
+    private Borrower borrower;
 
     @Before
     public void before(){
@@ -22,6 +22,8 @@ public class LibraryTest {
         this.book1 = new Book("title1", "author1", "crime");
         this.book2 = new Book("title2", "author2", "horror");
         this.book3 = new Book("title3", "author3", "thriller");
+
+        this.borrower = new Borrower("Bob");
     }
 
     @Test
@@ -46,4 +48,14 @@ public class LibraryTest {
         assertEquals(2, smallLibrary.getBooks());
     }
 
+    @Test
+    public void borrowBookToCustomer(){
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+        library.borrowBook(book1, borrower);
+        library.borrowBook(book2, borrower);
+        assertEquals(1, library.getBooks());
+        assertEquals(2, borrower.getBooks());
+    }
 }
